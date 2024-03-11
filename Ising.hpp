@@ -45,7 +45,7 @@ public:
     int sweepNumInOneFlush=3000;// flush the results to python every sweepNumInOneFlush*L iterations
     int flushMaxNum=100;
     int dataNumTotal=15000;
-
+    int lastFileNum=0;
 public:
     ///
     /// @param cmd python execution string

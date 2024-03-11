@@ -53,8 +53,9 @@ elif len(inXMLFileNames)%3==1:
     xmlFileToBeParsed=deepcopy(inXMLFileNames[1:])
 else:
     xmlFileToBeParsed=deepcopy(inXMLFileNames[2:])
+lastFileNum=12 if len(xmlFileToBeParsed)>12 else int(len(xmlFileToBeParsed)/3*2)
 
-xmlFileToBeParsed=xmlFileToBeParsed[int(len(xmlFileToBeParsed)/3*2):]
+xmlFileToBeParsed=xmlFileToBeParsed[lastFileNum:]
 
 # print("xml file number: "+str(len(xmlFileToBeParsed)))
 def parse1File(fileName):
@@ -198,7 +199,7 @@ else:
     print("mean0="+str(mean0)+", mean1="+str(mean1))
     print("hf0="+str(hf0)+", hf1="+str(hf1))
     if np.abs(mean0-mean1)<=hf0 or np.abs(mean0-mean1)<=hf1:
-        print(sigEq+" "+str(lagVal))
+        print(sigEq+", lag="+str(lagVal)+", fileNum="+str(lastFileNum))
         exit()
     else:
         print(sigContinue)

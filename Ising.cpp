@@ -142,7 +142,8 @@ void Ising::reachEqMC(bool& ferro, int &lag, int&loopTotal) {// mc simulation wh
     std::regex stopRegex("stop");
     std::regex wrongRegex("wrong");
     std::regex ErrRegex("Err");
-    std::regex lagRegex("\\d+");
+    std::regex lagRegex("lag=\\s*(\\d+)");
+    std::regex  fileNumRegex("fileNum=\\s*(\\d+)");
     std::regex ferroRegex("ferro");
     std::regex eqRegex("equilibrium");
 
@@ -150,6 +151,7 @@ void Ising::reachEqMC(bool& ferro, int &lag, int&loopTotal) {// mc simulation wh
     std::smatch matchEAvgWrong;
     std::smatch matchEAvgErr;
     std::smatch matchEAvgLag;
+    std::smatch  matchFileNum;
     std::smatch matchEAvgFerro;
     std::smatch matchEAvgEq;
 
@@ -257,11 +259,16 @@ void Ising::reachEqMC(bool& ferro, int &lag, int&loopTotal) {// mc simulation wh
 
             if (std::regex_search(resultEAvg, matchEAvgEq, eqRegex)) {
                 if (std::regex_search(resultEAvg, matchEAvgLag, lagRegex) ) {
-                    std::string lagStrEAvg = matchEAvgLag.str(0);
-
+                    std::string lagStrEAvg = matchEAvgLag.str(1);
+                    std::cout<<"lagStrEAvg: "<<lagStrEAvg<<std::endl;
                     int lagEAvg = std::stoi(lagStrEAvg);
 
                     lag=lagEAvg;
+
+                    std::regex_search(resultEAvg,matchFileNum,fileNumRegex);
+                    std::string fileNumStr=matchFileNum.str(1);
+                    std::cout<<"fileNumStr: "<<fileNumStr<<std::endl;
+                    this->lastFileNum=std::stoi(fileNumStr);
 
                     active = false;
                 }
