@@ -109,6 +109,7 @@ void Ising::reachEqMC(bool& ferro, int &lag, int&loopTotal) {// mc simulation wh
             sCurr[i][j]=sRange[indsAll(rd)];
         }
     }
+//    std::cout<<"init s="<<sAvg(sCurr)<<std::endl;
 
 
     std::ranlux24_base e2(rd());
@@ -211,7 +212,7 @@ void Ising::reachEqMC(bool& ferro, int &lag, int&loopTotal) {// mc simulation wh
         //inquire equilibrium of EAvg
         std::string commandEAvg = "python3 checkVec.py " + outEAllSubDir;
         //inquire equilibrium of s
-        std::string commandSAvg="python3 checkVec.py "+outSAllSubDir;
+        std::string commandSAvg="python3 check_s_Vec.py "+outSAllSubDir;
         std::string resultEAvg;
         std::string resultSAvg;
         if (fls % 3 == 2) {
