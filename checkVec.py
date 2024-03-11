@@ -55,7 +55,7 @@ else:
     xmlFileToBeParsed=deepcopy(inXMLFileNames[2:])
 lastFileNum=12 if len(xmlFileToBeParsed)>12 else int(len(xmlFileToBeParsed)/3*2)
 
-xmlFileToBeParsed=xmlFileToBeParsed[lastFileNum:]
+xmlFileToBeParsed=xmlFileToBeParsed[-lastFileNum:]
 
 # print("xml file number: "+str(len(xmlFileToBeParsed)))
 def parse1File(fileName):
