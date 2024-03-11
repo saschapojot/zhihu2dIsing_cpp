@@ -318,8 +318,11 @@ void Ising::executionMC(const int& lag,const int & loopEq) {// mc simulation wit
     double lagDB = static_cast<double>(lag);
     double loopEqDB = static_cast<double >(loopEq);
     int counter=0;
-
-    int remainingDataNum = this->dataNumTotal - static_cast<int>(std::floor(loopEqDB / lagDB * 2 / 3));
+    double lastFileNumDB=static_cast<double >(this->lastFileNum);
+    double flushNumDB=static_cast<double >(this->flushMaxNum);
+    double sweepNumPerFlush=static_cast<double >(this->sweepNumInOneFlush);
+    double NN=static_cast<double >(N*N);
+    int remainingDataNum = this->dataNumTotal - static_cast<int>(std::floor(lastFileNumDB*flushNumDB*sweepNumPerFlush*NN/lagDB));
     int remainingLoopNum = remainingDataNum * lag;
 
     if (remainingLoopNum <= 0) {
