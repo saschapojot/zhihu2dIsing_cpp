@@ -163,7 +163,8 @@ def Jackknife(vec):
 
 # M=100
 # lags=30000
-acfOfVec=sm.tsa.acf(vecValsCombined)
+NLags=int(len(vecValsCombined)*2/3)
+acfOfVec=sm.tsa.acf(vecValsCombined,nlags=NLags)
 # print("min correlation is ",np.min(acfOfVec))
 # print("total elem number = "+str(len(vecValsCombined)))
 # plt.figure()
